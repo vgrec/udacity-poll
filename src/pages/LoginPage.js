@@ -28,7 +28,7 @@ const LoginPage = ({ users }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="container-form" onSubmit={handleSubmit}>
         <h2>Employee Polls</h2>
 
         <img src={appLogo} alt="App Logo" width="250px" height="250px" />

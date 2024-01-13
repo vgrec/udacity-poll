@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-form {
+.container-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,9 +20,9 @@ form {
   padding: 10px;
 }
 
-form select,
-form input,
-form button {
+.container-form select,
+.container-form input,
+.container-form button {
   box-sizing: border-box;
   width: 250px;
   padding: 8px;
@@ -52,12 +52,23 @@ form button {
   margin: auto;
 }
 
-
-.leaderboard td, th {
+.leaderboard td,
+th {
   border: 1px solid #ccc;
   padding: 8px;
 }
 
 .leaderboard th {
   background-color: #eeeaea;
+}
+
+.container-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  padding: 8px;
+  border: 1px solid #ccc;
 }

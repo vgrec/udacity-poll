@@ -16,7 +16,7 @@ const NewPollPage = () => {
       <p className="center-text">Create new poll</p>
       <div className="poll-container">
         <h2 className="center-text">Would you rather?</h2>
-        <form onSubmit={handleSubmit}>
+        <form className="container-form" onSubmit={handleSubmit}>
           <strong>First option</strong>
           <input
             onChange={(e) => setOptionOne(e.target.value)}
