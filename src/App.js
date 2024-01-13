@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import LoginPage from "./pages/LoginPage";
+import { useEffect, useState } from "react";
+import { _getUsers } from "./_DATA";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    _getUsers().then((users) => setUsers(users));
+  }, []);
+
+  console.log(users);
+
+  return users.length === 0 ? (
+    <h4 style={{padding: 8}}>Loading...</h4>
+  ) : (
+    <LoginPage users={Object.values(users)} />
   );
 }
 
