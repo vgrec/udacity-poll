@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import DropdownItem from "./DropdownItem";
 
-const DropdownMenu = ({ users, onOptionSelected }) => {
+const DropdownItem = ({ user }) => {
+  return <option value={user.id}>{user.name}</option>;
+};
+
+const UsersDropdownMenu = ({ users, onOptionSelected }) => {
   const [selectedOption, setSelectedOption] = useState(users[0].id);
 
   const handleOptionsChanged = (e) => {
     const userId = e.target.value;
-    console.log(userId);
 
     setSelectedOption(userId);
     onOptionSelected(userId);
@@ -21,4 +23,4 @@ const DropdownMenu = ({ users, onOptionSelected }) => {
   );
 };
 
-export default DropdownMenu;
+export default UsersDropdownMenu;

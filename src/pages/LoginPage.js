@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DropdownMenu from "../components/DropdownMenu";
+import UsersDropdownMenu from "../components/UsersDropdownMenu";
 import appLogo from "../images/app_logo.png";
 
 const LoginPage = ({ users }) => {
@@ -34,7 +34,7 @@ const LoginPage = ({ users }) => {
         <img src={appLogo} alt="App Logo" width="250px" height="250px" />
 
         <strong style={{ marginTop: 16 }}>Choose a test user to login</strong>
-        <DropdownMenu users={users} onOptionSelected={onOptionsSelected} />
+        <UsersDropdownMenu users={users} onOptionSelected={onOptionsSelected} />
         <br />
         <input
           type="text"
