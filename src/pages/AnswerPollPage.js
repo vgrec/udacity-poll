@@ -1,9 +1,10 @@
 const AnswerPollPage = ({ question, author }) => {
-  console.log(question);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted");
+
+    const selectedQuestion = e.target.radioGroup.value;
+
+    console.log("submitted", selectedQuestion);
   };
 
   return (
@@ -14,7 +15,6 @@ const AnswerPollPage = ({ question, author }) => {
         flexDirection: "column",
         alignItems: "center",
         width: "80%",
-        border: "1px solid black",
       }}
     >
       <h2>Poll by {question.author}</h2>
