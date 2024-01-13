@@ -5,6 +5,7 @@ import { _getUsers, _getQuestions } from "./_DATA";
 import NewPollPage from "./pages/NewPollPage";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import AnswerPollPage from "./pages/AnswerPollPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -28,13 +29,16 @@ function App() {
     (user) => user.id === selectedQuestion.author
   );
 
+  const authedUser = "sarahedo";
+
   return users.length === 0 ? (
     <h4 style={{ padding: 8 }}>Loading...</h4>
   ) : (
     // <LoginPage users={Object.values(users)} />
     // <NewPollPage />
     // <LeaderboardPage users={usersArray()} />
-    <AnswerPollPage question={selectedQuestion} author={author} />
+    // <AnswerPollPage question={selectedQuestion} author={author} />
+    <HomePage questions={questionsArray()} authedUser={authedUser} />
   );
 }
 
