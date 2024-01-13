@@ -45,3 +45,19 @@ form button {
 .center-text {
   text-align: center;
 }
+
+.leaderboard {
+  width: 80%;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+
+.leaderboard td, th {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.leaderboard th {
+  background-color: #eeeaea;
+}
