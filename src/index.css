@@ -68,6 +68,12 @@ th {
   justify-content: center;
 }
 
+.container-center-vertical {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .button {
   padding: 8px;
   border: 1px solid #ccc;
@@ -82,7 +88,7 @@ th {
   align-items: center;
 }
 
-.questions-container{
+.questions-container {
   display: flex;
   flex-flow: row wrap;
   gap: 16px;

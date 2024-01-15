@@ -6,6 +6,8 @@ import NewPollPage from "./pages/NewPollPage";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import AnswerPollPage from "./pages/AnswerPollPage";
 import HomePage from "./pages/HomePage";
+import ViewPollPage from "./pages/PollResultsPage";
+import PollResultsPage from "./pages/PollResultsPage";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -38,7 +40,8 @@ function App() {
     // <NewPollPage />
     // <LeaderboardPage users={usersArray()} />
     // <AnswerPollPage question={selectedQuestion} author={author} />
-    <HomePage questions={questionsArray()} authedUser={authedUser} />
+    // <HomePage questions={questionsArray()} authedUser={authedUser} />
+    <PollResultsPage question={selectedQuestion} authedUser={authedUser} />
   );
 }
 
