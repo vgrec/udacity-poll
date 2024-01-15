@@ -1,4 +1,3 @@
-import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import { useEffect, useState } from "react";
 import { _getUsers, _getQuestions } from "./_DATA";
@@ -8,6 +7,8 @@ import AnswerPollPage from "./pages/AnswerPollPage";
 import HomePage from "./pages/HomePage";
 import ViewPollPage from "./pages/PollResultsPage";
 import PollResultsPage from "./pages/PollResultsPage";
+import { Route, Routes } from "react-router-dom";
+import PollDetailsPage from "./pages/PollDetailsPage";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -36,12 +37,31 @@ function App() {
   return users.length === 0 ? (
     <h4 style={{ padding: 8 }}>Loading...</h4>
   ) : (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <HomePage questions={questionsArray()} authedUser={authedUser} />
+        }
+      />
+      <Route path="/login" element={<LoginPage users={usersArray()} />} />
+      <Route path="/add" element={<NewPollPage />} />
+      <Route
+        path="/leaderboard"
+        element={<LeaderboardPage users={usersArray()} />}
+      />
+      <Route
+        path="/questions/:question_id"
+        element={<PollDetailsPage id={2} />}
+      />
+    </Routes>
+
     // <LoginPage users={Object.values(users)} />
     // <NewPollPage />
     // <LeaderboardPage users={usersArray()} />
     // <AnswerPollPage question={selectedQuestion} author={author} />
     // <HomePage questions={questionsArray()} authedUser={authedUser} />
-    <PollResultsPage question={selectedQuestion} authedUser={authedUser} />
+    // <PollResultsPage question={selectedQuestion} authedUser={authedUser} />
   );
 }
 

@@ -1,15 +1,18 @@
 import { useState } from "react";
 import UsersDropdownMenu from "../components/UsersDropdownMenu";
 import appLogo from "../images/app_logo.png";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ users }) => {
   const [username, setUsername] = useState(users[0].id);
   const [password, setPassword] = useState(users[0].password);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log("loggin with: ", username, password);
+    navigate("/");
   };
 
   const onOptionsSelected = (userId) => {
