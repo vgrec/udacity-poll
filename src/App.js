@@ -44,7 +44,7 @@ function App() {
           <HomePage questions={questionsArray()} authedUser={authedUser} />
         }
       />
-      <Route path="/login" element={<LoginPage users={usersArray()} />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/add" element={<NewPollPage />} />
       <Route
         path="/leaderboard"

@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UsersDropdownMenu from "../components/UsersDropdownMenu";
 import appLogo from "../images/app_logo.png";
 import { useNavigate } from "react-router-dom";
+import { _getUsers } from "../_DATA";
 
-const LoginPage = ({ users }) => {
-  const [username, setUsername] = useState(users[0].id);
-  const [password, setPassword] = useState(users[0].password);
+const LoginPage = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    _getUsers().then((users) => {
+      const usersArray = Object.values(users);
+      setUsers(Object.values(usersArray));
+      setUsername(usersArray[0].id);
+      setPassword(usersArray[0].password);
+    });
+  }, []);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -36,8 +48,21 @@ const LoginPage = ({ users }) => {
 
         <img src={appLogo} alt="App Logo" width="250px" height="250px" />
 
-        <strong style={{ marginTop: 16 }}>Choose a test user to login</strong>
-        <UsersDropdownMenu users={users} onOptionSelected={onOptionsSelected} />
+        {users.length === 0 ? (
+          <h4>Loading test users...</h4>
+        ) : (
+          <div className="container-center-vertical">
+            <strong style={{ marginTop: 16 }}>
+              Choose a test user to login
+            </strong>
+            <br />
+            <UsersDropdownMenu
+              users={users}
+              onOptionSelected={onOptionsSelected}
+            />
+          </div>
+        )}
+
         <br />
         <input
           type="text"
