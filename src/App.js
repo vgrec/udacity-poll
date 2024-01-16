@@ -38,13 +38,13 @@ function App() {
     <h4 style={{ padding: 8 }}>Loading...</h4>
   ) : (
     <Routes>
+      <Route path="/login" element={<LoginPage />} />
       <Route
         path="/"
         element={
           <HomePage questions={questionsArray()} authedUser={authedUser} />
         }
       />
-      <Route path="/login" element={<LoginPage />} />
       <Route path="/add" element={<NewPollPage />} />
       <Route
         path="/leaderboard"
