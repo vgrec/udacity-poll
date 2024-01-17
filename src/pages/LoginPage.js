@@ -3,10 +3,16 @@ import UsersDropdownMenu from "../components/UsersDropdownMenu";
 import appLogo from "../images/app_logo.png";
 import { useNavigate } from "react-router-dom";
 import { _getUsers } from "../_DATA";
+import { connect } from "react-redux";
+import { setAuthUser } from "../actions/authedUser";
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const [users, setUsers] = useState([]);
 
+  console.log("LoginPage props: ", props);
+
+  // Fetch test users to be displayed in
+  // a dropdown menu for testing purposes.
   useEffect(() => {
     _getUsers().then((users) => {
       const usersArray = Object.values(users);
@@ -18,13 +24,25 @@ const LoginPage = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  const isLogginButtonDisabled =
+    isLoggingIn || username === "" || password === "";
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("loggin with: ", username, password);
-    navigate("/");
+    setIsLoggingIn(true);
+    const users = await _getUsers();
+    if (users[username].password === password) {
+      props.dispatch(setAuthUser(username));
+      navigate("/");
+    } else {
+      alert("Invalid password");
+    }
+    setIsLoggingIn(false);
   };
 
   const onOptionsSelected = (userId) => {
@@ -76,10 +94,12 @@ const LoginPage = () => {
           placeholder="Password"
           value={password}
         />
-        <button>Login</button>
+        <button disabled={isLogginButtonDisabled}>
+          {isLoggingIn ? "Logging in..." : "Login"}
+        </button>
       </form>
     </div>
   );
 };
 
-export default LoginPage;
+export default connect()(LoginPage);
