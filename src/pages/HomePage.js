@@ -30,6 +30,7 @@ const HomePage = (props) => {
 
   return (
     <div style={{ width: "70%", margin: "auto" }}>
+      <p>Logged in as: {props.authedUser}</p>
       <h2>New Questions</h2>
       <div className="questions-container">
         {newQuestions.map((question) => {

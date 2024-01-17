@@ -9,42 +9,49 @@ import ViewPollPage from "./pages/PollResultsPage";
 import PollResultsPage from "./pages/PollResultsPage";
 import { Route, Routes } from "react-router-dom";
 import PollDetailsPage from "./pages/PollDetailsPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [questions, setQuestions] = useState([]);
+  // const [users, setUsers] = useState([]);
+  // const [questions, setQuestions] = useState([]);
 
-  useEffect(() => {
-    _getUsers().then((users) => setUsers(users));
-  }, []);
+  // useEffect(() => {
+  //   _getUsers().then((users) => setUsers(users));
+  // }, []);
 
-  useEffect(() => {
-    _getQuestions().then((questions) => setQuestions(questions));
-  }, []);
+  // useEffect(() => {
+  //   _getQuestions().then((questions) => setQuestions(questions));
+  // }, []);
 
-  console.log(users);
+  // console.log(users);
 
-  const usersArray = () => Object.values(users);
-  const questionsArray = () => Object.values(questions);
+  // const usersArray = () => Object.values(users);
+  // const questionsArray = () => Object.values(questions);
 
-  const selectedQuestion = questionsArray()[0];
-  const author = usersArray().find(
-    (user) => user.id === selectedQuestion.author
-  );
+  // const selectedQuestion = questionsArray()[0];
+  // const author = usersArray().find(
+  //   (user) => user.id === selectedQuestion.author
+  // );
 
-  const authedUser = "sarahedo";
+  // const authedUser = "sarahedo";
+
+  const users = [1, 2, 3, 4, 5];
 
   return users.length === 0 ? (
     <h4 style={{ padding: 8 }}>Loading...</h4>
   ) : (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/" element={<HomePage />} />
-      <Route path="/add" element={<NewPollPage />} />
       <Route
-        path="/leaderboard"
-        element={<LeaderboardPage users={usersArray()} />}
+        path="/"
+        element={
+          <PrivateRoute>
+            <HomePage />
+          </PrivateRoute>
+        }
       />
+      <Route path="/add" element={<NewPollPage />} />
+      <Route path="/leaderboard" element={<LeaderboardPage />} />
       <Route
         path="/questions/:question_id"
         element={<PollDetailsPage id={2} />}
