@@ -3,24 +3,22 @@ import QuestionCard from "../components/QuestionCard";
 import { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
 
-const HomePage = (props) => {
-  console.log("HomePage props", props);
-
+const HomePage = ({ dispatch, questions, authedUser }) => {
   useEffect(() => {
-    props.dispatch(handleInitialData());
+    dispatch(handleInitialData());
   }, []);
 
-  const newQuestions = props.questions.filter((question) => {
+  const newQuestions = questions.filter((question) => {
     return (
-      !question.optionOne.votes.includes(props.authedUser) &&
-      !question.optionTwo.votes.includes(props.authedUser)
+      !question.optionOne.votes.includes(authedUser) &&
+      !question.optionTwo.votes.includes(authedUser)
     );
   });
 
-  const answeredQuestions = props.questions.filter((question) => {
+  const answeredQuestions = questions.filter((question) => {
     return (
-      question.optionOne.votes.includes(props.authedUser) ||
-      question.optionTwo.votes.includes(props.authedUser)
+      question.optionOne.votes.includes(authedUser) ||
+      question.optionTwo.votes.includes(authedUser)
     );
   });
 
@@ -28,14 +26,17 @@ const HomePage = (props) => {
     console.log("question clicked", questionId);
   };
 
-  return (
+  return questions.length === 0 ? (
+    <h4 className="center-text">Loading...</h4>
+  ) : (
     <div style={{ width: "70%", margin: "auto" }}>
-      <p>Logged in as: {props.authedUser}</p>
+      <p>Logged in as: {authedUser}</p>
       <h2>New Questions</h2>
       <div className="questions-container">
         {newQuestions.map((question) => {
           return (
             <QuestionCard
+              key={question.id}
               question={question}
               onQuestionClicked={(id) => handleQuestionClicked(id)}
             />
@@ -48,6 +49,7 @@ const HomePage = (props) => {
         {answeredQuestions.map((question) => {
           return (
             <QuestionCard
+              key={question.id}
               question={question}
               onQuestionClicked={(id) => handleQuestionClicked(id)}
             />
