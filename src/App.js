@@ -12,6 +12,8 @@ import PollDetailsPage from "./pages/PollDetailsPage";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
+  console.log("App.js - App reloaded");
+
   // const [users, setUsers] = useState([]);
   // const [questions, setQuestions] = useState([]);
 
@@ -54,7 +56,11 @@ function App() {
       <Route path="/leaderboard" element={<LeaderboardPage />} />
       <Route
         path="/questions/:question_id"
-        element={<PollDetailsPage id={2} />}
+        element={
+          <PrivateRoute>
+            <PollDetailsPage />
+          </PrivateRoute>
+        }
       />
     </Routes>
 

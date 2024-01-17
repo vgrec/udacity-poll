@@ -1,6 +1,6 @@
-const AnswerPollPage = ({ question, author }) => {
-  const isOptionOneSelected = question.optionOne.votes.includes(author.id);
-  const isOptionTwoSelected = question.optionTwo.votes.includes(author.id);
+const AnswerPollPage = ({ question }) => {
+  const isOptionOneSelected = question.optionOne.votes.includes(question.author);
+  const isOptionTwoSelected = question.optionTwo.votes.includes(question.author);
 
   const isFormEnabled = !isOptionOneSelected && !isOptionTwoSelected;
 
@@ -27,7 +27,7 @@ const AnswerPollPage = ({ question, author }) => {
       }}
     >
       <h2>Poll by {question.author}</h2>
-      <img src={author.avatarURL} alt="avatar" width="100" height="100" />
+      <img src={question.author.avatarURL} alt="avatar" width="100" height="100" />
       <br />
       <h3>Would you rather?</h3>
       <form onSubmit={handleSubmit}>

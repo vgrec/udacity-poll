@@ -2,8 +2,11 @@ import { connect } from "react-redux";
 import QuestionCard from "../components/QuestionCard";
 import { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = ({ dispatch, questions, authedUser }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(handleInitialData());
   }, []);
@@ -24,6 +27,7 @@ const HomePage = ({ dispatch, questions, authedUser }) => {
 
   const handleQuestionClicked = (questionId) => {
     console.log("question clicked", questionId);
+    navigate(`/questions/${questionId}`);
   };
 
   return questions.length === 0 ? (

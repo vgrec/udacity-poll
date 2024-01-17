@@ -1,10 +1,30 @@
-import NewPollPage from "./NewPollPage";
+import { connect } from "react-redux";
 import PollResultsPage from "./PollResultsPage";
+import AnswerPollPage from "./AnswerPollPage";
+import { useParams } from "react-router-dom";
 
-const PollDetailsPage = ({ id }) => {
-  const isPollAnswered = false;
+const PollDetailsPage = ({ authedUser, questions }) => {
+  const { question_id } = useParams();
+  const question = questions[question_id];
 
-  return <div>{isPollAnswered ? <PollResultsPage /> : <NewPollPage />}</div>;
+  const isPollAnswered =
+    question.optionOne.votes.includes(authedUser) ||
+    question.optionTwo.votes.includes(authedUser);
+
+  return (
+    <div>
+      {isPollAnswered ? (
+        <PollResultsPage question={question} authedUser={authedUser} />
+      ) : (
+        <AnswerPollPage question={question} />
+      )}
+    </div>
+  );
 };
 
-export default PollDetailsPage;
+const mapStateToProps = ({ authedUser, questions }) => ({
+  authedUser,
+  questions,
+});
+
+export default connect(mapStateToProps)(PollDetailsPage);
