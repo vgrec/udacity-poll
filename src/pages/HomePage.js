@@ -1,22 +1,28 @@
+import { connect } from "react-redux";
 import QuestionCard from "../components/QuestionCard";
+import { useEffect } from "react";
+import { handleInitialData } from "../actions/shared";
 
-const HomePage = ({ questions, authedUser }) => {
-  const newQuestions = questions.filter((question) => {
+const HomePage = (props) => {
+  console.log("HomePage props", props);
+
+  useEffect(() => {
+    props.dispatch(handleInitialData());
+  }, []);
+
+  const newQuestions = props.questions.filter((question) => {
     return (
-      !question.optionOne.votes.includes(authedUser) &&
-      !question.optionTwo.votes.includes(authedUser)
+      !question.optionOne.votes.includes(props.authedUser) &&
+      !question.optionTwo.votes.includes(props.authedUser)
     );
   });
 
-  const answeredQuestions = questions.filter((question) => {
+  const answeredQuestions = props.questions.filter((question) => {
     return (
-      question.optionOne.votes.includes(authedUser) ||
-      question.optionTwo.votes.includes(authedUser)
+      question.optionOne.votes.includes(props.authedUser) ||
+      question.optionTwo.votes.includes(props.authedUser)
     );
   });
-
-  console.log("newQuestions", newQuestions);
-  console.log("answeredQuestions", answeredQuestions);
 
   const handleQuestionClicked = (questionId) => {
     console.log("question clicked", questionId);
@@ -51,4 +57,9 @@ const HomePage = ({ questions, authedUser }) => {
   );
 };
 
-export default HomePage;
+const mapStateToProps = ({ authedUser, questions }) => ({
+  authedUser,
+  questions: Object.values(questions),
+});
+
+export default connect(mapStateToProps)(HomePage);
