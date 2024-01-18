@@ -16,7 +16,7 @@ const PollDetailsPage = ({ authedUser, questions }) => {
       {isPollAnswered ? (
         <PollResultsPage question={question} authedUser={authedUser} />
       ) : (
-        <AnswerPollPage question={question} />
+        <AnswerPollPage question={question} authedUser={authedUser} />
       )}
     </div>
   );

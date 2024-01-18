@@ -1,6 +1,9 @@
-const AnswerPollPage = ({ question }) => {
-  const isOptionOneSelected = question.optionOne.votes.includes(question.author);
-  const isOptionTwoSelected = question.optionTwo.votes.includes(question.author);
+import { connect } from "react-redux";
+import { handleSaveQuestionAnswer } from "../actions/questions";
+
+const AnswerPollPage = ({ dispatch, question, authedUser }) => {
+  const isOptionOneSelected = question.optionOne.votes.includes(authedUser);
+  const isOptionTwoSelected = question.optionTwo.votes.includes(authedUser);
 
   const isFormEnabled = !isOptionOneSelected && !isOptionTwoSelected;
 
@@ -13,7 +16,7 @@ const AnswerPollPage = ({ question }) => {
       return;
     }
 
-    console.log("submitted", selectedQuestion);
+    dispatch(handleSaveQuestionAnswer(question.id, selectedQuestion));
   };
 
   return (
@@ -27,7 +30,12 @@ const AnswerPollPage = ({ question }) => {
       }}
     >
       <h2>Poll by {question.author}</h2>
-      <img src={question.author.avatarURL} alt="avatar" width="100" height="100" />
+      <img
+        src={question.author.avatarURL}
+        alt="avatar"
+        width="100"
+        height="100"
+      />
       <br />
       <h3>Would you rather?</h3>
       <form onSubmit={handleSubmit}>
@@ -69,4 +77,4 @@ const AnswerPollPage = ({ question }) => {
   );
 };
 
-export default AnswerPollPage;
+export default connect()(AnswerPollPage);
