@@ -1,4 +1,5 @@
 import LeaderboardTable from "../components/LeaderboardTable";
+import { connect } from "react-redux";
 
 const LeaderboardPage = ({ users }) => {
   const sortedUsers = users.sort(
@@ -11,4 +12,8 @@ const LeaderboardPage = ({ users }) => {
   return <LeaderboardTable users={sortedUsers} />;
 };
 
-export default LeaderboardPage;
+const mapStateToProps = ({ users }) => ({
+  users: Object.values(users),
+});
+
+export default connect(mapStateToProps)(LeaderboardPage);
