@@ -1,13 +1,8 @@
 import { connect } from "react-redux";
 import { handleSaveQuestionAnswer } from "../actions/questions";
 
-const AnswerPollPage = ({ dispatch, question, authedUser }) => {
-  const isOptionOneSelected = question.optionOne.votes.includes(authedUser);
-  const isOptionTwoSelected = question.optionTwo.votes.includes(authedUser);
-
-  const isFormEnabled = !isOptionOneSelected && !isOptionTwoSelected;
-
-  const handleSubmit = (e) => {
+const AnswerPollPage = ({ dispatch, question }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const selectedQuestion = e.target.radioGroup.value;
@@ -41,8 +36,6 @@ const AnswerPollPage = ({ dispatch, question, authedUser }) => {
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 8 }}>
           <input
-            defaultChecked={isOptionOneSelected}
-            disabled={!isFormEnabled}
             type="radio"
             id="optionOne"
             name="radioGroup"
@@ -53,8 +46,6 @@ const AnswerPollPage = ({ dispatch, question, authedUser }) => {
         </div>
         <div>
           <input
-            disabled={!isFormEnabled}
-            defaultChecked={isOptionTwoSelected}
             type="radio"
             id="optionTwo"
             name="radioGroup"
@@ -64,11 +55,7 @@ const AnswerPollPage = ({ dispatch, question, authedUser }) => {
           <label htmlFor="optionTwo">{question.optionTwo.text}</label>
         </div>
         <div className="container-center">
-          <button
-            disabled={!isFormEnabled}
-            className="button"
-            style={{ width: 100, margin: 24 }}
-          >
+          <button className="button" style={{ width: 100, margin: 24 }}>
             Submit
           </button>
         </div>
