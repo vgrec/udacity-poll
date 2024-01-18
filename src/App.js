@@ -10,6 +10,7 @@ import PollResultsPage from "./pages/PollResultsPage";
 import { Route, Routes } from "react-router-dom";
 import PollDetailsPage from "./pages/PollDetailsPage";
 import PrivateRoute from "./components/PrivateRoute";
+import Nav from "./components/Nav";
 
 function App() {
   console.log("App.js - App reloaded");
@@ -37,39 +38,45 @@ function App() {
 
   // const authedUser = "sarahedo";
 
-  const users = [1, 2, 3, 4, 5];
-
-  return users.length === 0 ? (
-    <h4 style={{ padding: 8 }}>Loading...</h4>
-  ) : (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route
-        path="/"
-        element={
-          <PrivateRoute>
-            <HomePage />
-          </PrivateRoute>
-        }
-      />
-      <Route path="/add" element={<NewPollPage />} />
-      <Route path="/leaderboard" element={<LeaderboardPage />} />
-      <Route
-        path="/questions/:question_id"
-        element={
-          <PrivateRoute>
-            <PollDetailsPage />
-          </PrivateRoute>
-        }
-      />
-    </Routes>
-
-    // <LoginPage users={Object.values(users)} />
-    // <NewPollPage />
-    // <LeaderboardPage users={usersArray()} />
-    // <AnswerPollPage question={selectedQuestion} author={author} />
-    // <HomePage questions={questionsArray()} authedUser={authedUser} />
-    // <PollResultsPage question={selectedQuestion} authedUser={authedUser} />
+  return (
+    <div>
+      <Nav />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <PrivateRoute>
+              <NewPollPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/leaderboard"
+          element={
+            <PrivateRoute>
+              <LeaderboardPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/questions/:question_id"
+          element={
+            <PrivateRoute>
+              <PollDetailsPage />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 
