@@ -11,8 +11,9 @@ import { Route, Routes } from "react-router-dom";
 import PollDetailsPage from "./pages/PollDetailsPage";
 import PrivateRoute from "./components/PrivateRoute";
 import Nav from "./components/Nav";
+import { connect } from "react-redux";
 
-function App() {
+function App({ authedUser }) {
   console.log("App.js - App reloaded");
 
   // const [users, setUsers] = useState([]);
@@ -40,7 +41,7 @@ function App() {
 
   return (
     <div>
-      <Nav />
+      {authedUser && <Nav />}
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route
@@ -80,4 +81,8 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = ({ authedUser }) => ({
+  authedUser,
+});
+
+export default connect(mapStateToProps)(App);
