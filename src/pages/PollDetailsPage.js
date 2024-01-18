@@ -3,7 +3,7 @@ import PollResultsPage from "./PollResultsPage";
 import AnswerPollPage from "./AnswerPollPage";
 import { useParams } from "react-router-dom";
 
-const PollDetailsPage = ({ authedUser, questions }) => {
+const PollDetailsPage = ({ authedUser, questions, users }) => {
   const { question_id } = useParams();
   const question = questions[question_id];
 
@@ -16,15 +16,19 @@ const PollDetailsPage = ({ authedUser, questions }) => {
       {isPollAnswered ? (
         <PollResultsPage question={question} authedUser={authedUser} />
       ) : (
-        <AnswerPollPage question={question} />
+        <AnswerPollPage
+          question={question}
+          authorAvatarURL={users[question.author].avatarURL}
+        />
       )}
     </div>
   );
 };
 
-const mapStateToProps = ({ authedUser, questions }) => ({
+const mapStateToProps = ({ authedUser, questions, users }) => ({
   authedUser,
   questions,
+  users,
 });
 
 export default connect(mapStateToProps)(PollDetailsPage);

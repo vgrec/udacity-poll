@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { handleSaveQuestionAnswer } from "../actions/questions";
 
-const AnswerPollPage = ({ dispatch, question }) => {
+const AnswerPollPage = ({ dispatch, question, authorAvatarURL }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,7 +26,7 @@ const AnswerPollPage = ({ dispatch, question }) => {
     >
       <h2>Poll by {question.author}</h2>
       <img
-        src={question.author.avatarURL}
+        src={authorAvatarURL}
         alt="avatar"
         width="100"
         height="100"
