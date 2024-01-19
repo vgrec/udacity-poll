@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { handleAddQuestion } from "../actions/questions";
+import { useNavigate } from "react-router-dom";
 
-const NewPollPage = () => {
+const NewPollPage = ({ dispatch }) => {
+  const navigate = useNavigate();
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
 
@@ -9,11 +13,16 @@ const NewPollPage = () => {
 
     console.log("optionOne: ", optionOne);
     console.log("optionTwo: ", optionTwo);
+
+    dispatch(
+      handleAddQuestion(optionOne, optionTwo, () => {
+        navigate("/");
+      })
+    );
   };
 
   return (
     <div>
-      <p className="center-text">Create new poll</p>
       <div className="poll-container">
         <h2 className="center-text">Would you rather?</h2>
         <form className="container-form" onSubmit={handleSubmit}>
@@ -39,4 +48,4 @@ const NewPollPage = () => {
   );
 };
 
-export default NewPollPage;
+export default connect()(NewPollPage);
