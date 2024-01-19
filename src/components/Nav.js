@@ -1,9 +1,14 @@
 import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { setAuthUser } from "../actions/authedUser";
 
-const Nav = ({ authedUser, authedUserAvatarURL }) => {
+const Nav = ({ dispatch, authedUser }) => {
   const getNavLinkClass = (isActive) => {
     return isActive ? "nav-link active" : "nav-link";
+  };
+
+  const handleLogout = () => {
+    dispatch(setAuthUser(null));
   };
 
   return (
@@ -40,7 +45,7 @@ const Nav = ({ authedUser, authedUserAvatarURL }) => {
         <ul>
           <li>Logged in as: {authedUser}</li>
           <li>
-            <Link to="/logout">Logout</Link>
+            <Link onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
       </nav>
@@ -49,9 +54,8 @@ const Nav = ({ authedUser, authedUserAvatarURL }) => {
   );
 };
 
-const mapStateToProps = ({ authedUser, users }) => ({
+const mapStateToProps = ({ authedUser }) => ({
   authedUser,
-  authedUserAvatarURL: users[authedUser].avatarURL,
 });
 
 export default connect(mapStateToProps)(Nav);
