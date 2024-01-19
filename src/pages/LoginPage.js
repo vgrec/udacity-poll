@@ -5,6 +5,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { _getUsers } from "../_DATA";
 import { connect } from "react-redux";
 import { setAuthUser } from "../actions/authedUser";
+import { handleInitialData } from "../actions/shared";
+
+// Load initial data after successful login in the App.js
 
 const LoginPage = (props) => {
   const [users, setUsers] = useState([]);
@@ -34,14 +37,19 @@ const LoginPage = (props) => {
   const location = useLocation();
   const redirectPage = location.state?.from?.pathname || "/";
 
+  const findUserById = (userId) => {
+    return users.find((user) => user.id === userId);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setIsLoggingIn(true);
-    const users = await _getUsers();
-    if (users[username].password === password) {
-      props.dispatch(setAuthUser(username));
-      
+
+    const user = findUserById(username);
+    if (user && user.password === password) {
+      await props.dispatch(handleInitialData(username));
+
       console.log("Redirecting to", redirectPage);
       navigate(redirectPage);
     } else {
