@@ -12,6 +12,7 @@ import PollDetailsPage from "./pages/PollDetailsPage";
 import PrivateRoute from "./components/PrivateRoute";
 import Nav from "./components/Nav";
 import { connect } from "react-redux";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App({ authedUser }) {
   console.log("App.js - App reloaded");
@@ -44,6 +45,9 @@ function App({ authedUser }) {
       {authedUser && <Nav />}
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
+
         <Route
           path="/"
           element={
