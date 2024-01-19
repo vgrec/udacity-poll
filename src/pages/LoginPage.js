@@ -41,6 +41,8 @@ const LoginPage = (props) => {
     const users = await _getUsers();
     if (users[username].password === password) {
       props.dispatch(setAuthUser(username));
+      
+      console.log("Redirecting to", redirectPage);
       navigate(redirectPage);
     } else {
       alert("Invalid password");
