@@ -4,7 +4,6 @@ import appLogo from "../images/app_logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { _getUsers } from "../_DATA";
 import { connect } from "react-redux";
-import { setAuthUser } from "../actions/authedUser";
 import { handleInitialData } from "../actions/shared";
 
 // Load initial data after successful login in the App.js

@@ -2,10 +2,15 @@ import { connect } from "react-redux";
 import PollResultsPage from "./PollResultsPage";
 import AnswerPollPage from "./AnswerPollPage";
 import { useParams } from "react-router-dom";
+import NotFoundPage from "./NotFoundPage";
 
 const PollDetailsPage = ({ authedUser, questions, users }) => {
   const { question_id } = useParams();
   const question = questions[question_id];
+
+  if (!question) {
+    return <NotFoundPage />;
+  }
 
   const isPollAnswered =
     question.optionOne.votes.includes(authedUser) ||
