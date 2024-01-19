@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import UsersDropdownMenu from "../components/UsersDropdownMenu";
 import appLogo from "../images/app_logo.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { _getUsers } from "../_DATA";
 import { connect } from "react-redux";
 import { setAuthUser } from "../actions/authedUser";
@@ -31,6 +31,8 @@ const LoginPage = (props) => {
     isLoggingIn || username === "" || password === "";
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectPage = location.state?.from?.pathname || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +41,7 @@ const LoginPage = (props) => {
     const users = await _getUsers();
     if (users[username].password === password) {
       props.dispatch(setAuthUser(username));
-      navigate("/");
+      navigate(redirectPage);
     } else {
       alert("Invalid password");
     }

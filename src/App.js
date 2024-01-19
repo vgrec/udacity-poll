@@ -46,7 +46,14 @@ function App({ authedUser }) {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
 
-        <Route path="*" element={<NotFoundPage />} />
+        <Route
+          path="*"
+          element={
+            <PrivateRoute>
+              <NotFoundPage />
+            </PrivateRoute>
+          }
+        />
 
         <Route
           path="/"
