@@ -1,6 +1,7 @@
+import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ authedUser, authedUserAvatarURL }) => {
   const getNavLinkClass = (isActive) => {
     return isActive ? "nav-link active" : "nav-link";
   };
@@ -37,7 +38,7 @@ const Nav = () => {
         </ul>
 
         <ul>
-          <li>@mtsamis</li>
+          <li>Logged in as: {authedUser}</li>
           <li>
             <Link to="/logout">Logout</Link>
           </li>
@@ -48,4 +49,9 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+const mapStateToProps = ({ authedUser, users }) => ({
+  authedUser,
+  authedUserAvatarURL: users[authedUser].avatarURL,
+});
+
+export default connect(mapStateToProps)(Nav);

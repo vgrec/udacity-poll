@@ -9,6 +9,7 @@ const HomePage = ({ dispatch, questions, authedUser }) => {
 
   useEffect(() => {
     dispatch(handleInitialData());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const newQuestions = questions.filter((question) => {
@@ -34,7 +35,6 @@ const HomePage = ({ dispatch, questions, authedUser }) => {
     <h4 className="center-text">Loading...</h4>
   ) : (
     <div style={{ width: "70%", margin: "auto" }}>
-      <p>Logged in as: {authedUser}</p>
       <h2>New Questions</h2>
       <div className="questions-container">
         {newQuestions.map((question) => {
