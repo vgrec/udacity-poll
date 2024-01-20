@@ -5,19 +5,23 @@ import { useNavigate } from "react-router-dom";
 const HomePage = ({ dispatch, questions, authedUser }) => {
   const navigate = useNavigate();
 
-  const newQuestions = questions.filter((question) => {
-    return (
-      !question.optionOne.votes.includes(authedUser) &&
-      !question.optionTwo.votes.includes(authedUser)
-    );
-  });
+  const newQuestions = questions
+    .filter((question) => {
+      return (
+        !question.optionOne.votes.includes(authedUser) &&
+        !question.optionTwo.votes.includes(authedUser)
+      );
+    })
+    .sort((a, b) => b.timestamp - a.timestamp);
 
-  const answeredQuestions = questions.filter((question) => {
-    return (
-      question.optionOne.votes.includes(authedUser) ||
-      question.optionTwo.votes.includes(authedUser)
-    );
-  });
+  const answeredQuestions = questions
+    .filter((question) => {
+      return (
+        question.optionOne.votes.includes(authedUser) ||
+        question.optionTwo.votes.includes(authedUser)
+      );
+    })
+    .sort((a, b) => b.timestamp - a.timestamp);
 
   const handleQuestionClicked = (questionId) => {
     console.log("question clicked", questionId);
