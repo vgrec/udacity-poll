@@ -95,18 +95,20 @@ const LoginPage = (props) => {
 
         <br />
         <input
+          data-testid="username"
           type="text"
           onChange={handleUsernameChange}
           placeholder="Username"
           value={username}
         />
         <input
+          data-testid="password"
           onChange={handlePasswordChange}
           type="password"
           placeholder="Password"
           value={password}
         />
-        <button disabled={isLogginButtonDisabled}>
+        <button data-testid="submit" disabled={isLogginButtonDisabled}>
           {isLoggingIn ? "Logging in..." : "Login"}
         </button>
       </form>
