@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import LeaderboardTable from "./components/LeaderboardTable";
+import LeaderboardTable from "../components/LeaderboardTable";
 
 describe("LeaderboardTable", () => {
   it("matches the snapshot when user is logged in", () => {

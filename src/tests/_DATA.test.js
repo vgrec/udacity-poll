@@ -1,5 +1,5 @@
-import { _saveQuestion } from "./_DATA";
-import { _saveQuestionAnswer } from "./_DATA";
+import { _saveQuestion } from "../_DATA";
+import { _saveQuestionAnswer } from "../_DATA";
 
 describe("_saveQuestion success", () => {
   it("will return the new question", async () => {
