@@ -1,7 +1,10 @@
 import { connect } from "react-redux";
 import { handleSaveQuestionAnswer } from "../actions/questions";
+import { useState } from "react";
 
 const AnswerPollPage = ({ dispatch, question, authorAvatarURL }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -11,7 +14,20 @@ const AnswerPollPage = ({ dispatch, question, authorAvatarURL }) => {
       return;
     }
 
-    dispatch(handleSaveQuestionAnswer(question.id, selectedQuestion));
+    setIsSubmitting(true);
+    
+    dispatch(
+      handleSaveQuestionAnswer(
+        question.id,
+        selectedQuestion,
+        () => {
+          setIsSubmitting(false);
+        },
+        () => {
+          setIsSubmitting(false);
+        }
+      )
+    );
   };
 
   return (
@@ -25,12 +41,7 @@ const AnswerPollPage = ({ dispatch, question, authorAvatarURL }) => {
       }}
     >
       <h2>Poll by {question.author}</h2>
-      <img
-        src={authorAvatarURL}
-        alt="avatar"
-        width="100"
-        height="100"
-      />
+      <img src={authorAvatarURL} alt="avatar" width="100" height="100" />
       <br />
       <h3>Would you rather?</h3>
       <form onSubmit={handleSubmit}>
@@ -55,7 +66,11 @@ const AnswerPollPage = ({ dispatch, question, authorAvatarURL }) => {
           <label htmlFor="optionTwo">{question.optionTwo.text}</label>
         </div>
         <div className="container-center">
-          <button className="button" style={{ width: 100, margin: 24 }}>
+          <button
+            disabled={isSubmitting}
+            className="button"
+            style={{ width: 100, margin: 24 }}
+          >
             Submit
           </button>
         </div>

@@ -28,7 +28,7 @@ export function saveQuestionAnswer(authedUser, qid, answer) {
   };
 }
 
-export function handleSaveQuestionAnswer(qid, answer) {
+export function handleSaveQuestionAnswer(qid, answer, onSuccess, onError) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
     _saveQuestionAnswer({
@@ -39,10 +39,12 @@ export function handleSaveQuestionAnswer(qid, answer) {
       .then(() => {
         dispatch(saveUserAnswer(authedUser, qid, answer));
         dispatch(saveQuestionAnswer(authedUser, qid, answer));
+        onSuccess();
       })
       .catch((e) => {
         console.warn("saveQuestionAnswerFailed: ", e);
         alert("Error saving answer. Try again.");
+        onError();
       });
   };
 }
