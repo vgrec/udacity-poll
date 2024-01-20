@@ -1,6 +1,6 @@
 # Employee Polls 
 
-This project is a web application created as part of the Udacity React Nanodegree Program. In order to improve collaboration and transparency within the company, every employee can access the application and create a poll with two proposed solutions. Employees can then vote on these solutions and see which solutions have the most votes. In addition, a dashboard that lists every employee ordered by the number of polls they've created and answered is presented.
+This project is a web application created as part of the Udacity React Nanodegree Program. In order to improve collaboration and transparency within the company, every employee can access the application and create a poll with two proposed solutions. Employees can then vote on these solutions and see which solutions have the most votes. In addition, a leaderboard that lists every employee ordered by the number of polls they've created and answered is presented.
 
 ### Prerequisites
 
