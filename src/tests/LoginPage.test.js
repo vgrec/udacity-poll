@@ -70,4 +70,26 @@ describe("LoginPage", () => {
 
     expect(window.alert).toHaveBeenCalledWith("Invalid password");
   });
+
+  it("will show alert when username is invalid", () => {
+    window.alert = jest.fn();
+
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <LoginPage />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    const usernameInput = screen.getByTestId("username");
+    const passwordInput = screen.getByTestId("password");
+    const submitButton = screen.getByTestId("submit");
+
+    fireEvent.change(usernameInput, { target: { value: "non-existend-user" } });
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
+    fireEvent.click(submitButton);
+
+    expect(window.alert).toHaveBeenCalledWith("Invalid password");
+  });
 });
