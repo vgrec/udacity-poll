@@ -7,17 +7,25 @@ const NewPollPage = ({ dispatch }) => {
   const navigate = useNavigate();
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("optionOne: ", optionOne);
-    console.log("optionTwo: ", optionTwo);
+    setIsSubmitting(true);
 
     dispatch(
-      handleAddQuestion(optionOne, optionTwo, () => {
-        navigate("/");
-      })
+      handleAddQuestion(
+        optionOne,
+        optionTwo,
+        () => {
+          setIsSubmitting(false);
+          navigate("/");
+        },
+        () => {
+          setIsSubmitting(false);
+        }
+      )
     );
   };
 
@@ -41,7 +49,7 @@ const NewPollPage = ({ dispatch }) => {
             type="text"
             placeholder="Second option"
           />
-          <button>Create Poll</button>
+          <button disabled={isSubmitting}>Create Poll</button>
         </form>
       </div>
     </div>

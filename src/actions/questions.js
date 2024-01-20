@@ -47,7 +47,12 @@ export function handleSaveQuestionAnswer(qid, answer) {
   };
 }
 
-export function handleAddQuestion(optionOneText, optionTwoText, onSuccess) {
+export function handleAddQuestion(
+  optionOneText,
+  optionTwoText,
+  onSuccess,
+  onError
+) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
     _saveQuestion({
@@ -62,6 +67,7 @@ export function handleAddQuestion(optionOneText, optionTwoText, onSuccess) {
       .catch((e) => {
         console.warn("addQuestionFailed: ", e);
         alert("Error adding question. Try again.");
+        onError();
       });
   };
 }
